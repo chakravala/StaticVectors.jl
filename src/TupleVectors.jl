@@ -2,6 +2,12 @@
 # this file is inspired from StaticArrays.jl
 # https://github.com/JuliaArrays/StaticArrays.jl
 
+module TupleVectors
+
+using LinearAlgebra
+
+export TupleVector, Values, Variables, FixedVector
+
 import Base: @propagate_inbounds, @_inline_meta, @pure
 
 abstract type TupleVector{N,T} <: AbstractVector{T} end
@@ -39,3 +45,7 @@ include("broadcast.jl")
 include("mapreduce.jl")
 include("arraymath.jl")
 include("linalg.jl")
+
+const SVector,MVector,SizedVector = Values,Variables,FixedVector
+
+end # module
