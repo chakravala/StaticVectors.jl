@@ -1,4 +1,4 @@
-using TupleVectors
+using StaticVectors
 using Test, LinearAlgebra
 
 #TODO

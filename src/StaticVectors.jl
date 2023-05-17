@@ -2,7 +2,7 @@
 # this file is inspired from StaticArrays.jl
 # https://github.com/JuliaArrays/StaticArrays.jl
 
-module TupleVectors
+module StaticVectors
 
 using LinearAlgebra
 

@@ -1,4 +1,4 @@
-# TupleVectors.jl
+# StaticVectors.jl
 
 *Statically sized tuple vectors for Julia*
 
@@ -18,9 +18,9 @@ as `FixedVector` for annotating standard `Vector`s with static size information.
 
 ### Quick start
 
-Add *TupleVectors* from the [Pkg REPL](https://docs.julialang.org/en/latest/stdlib/Pkg/#Getting-Started-1), i.e., `pkg> add TupleVectors`. Then:
+Add *StaticVectors* from the [Pkg REPL](https://docs.julialang.org/en/latest/stdlib/Pkg/#Getting-Started-1), i.e., `pkg> add StaticVectors`. Then:
 ```julia
-using TupleVectors
+using StaticVectors
 
 # Create Values using various forms, using constructors, functions or macros
 v1 = Values(1, 2, 3)

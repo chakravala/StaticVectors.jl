@@ -1,5 +1,5 @@
-name = "TupleVectors"
-uuid = "bda701b7-7ff5-4551-86da-655ebebc29fb"
+name = "StaticVectors"
+uuid = "20fadf95-9e3d-483c-97cd-cab2760e7998"
 authors = ["Michael Reed"]
 version = "1.0"
 
