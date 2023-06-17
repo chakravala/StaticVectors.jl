@@ -57,4 +57,7 @@ include("linalg.jl")
 
 const SVector,MVector,SizedVector = Values,Variables,FixedVector
 
+@pure countvalues(a::Int,b::Int) = Values{max(0,b-a+1),Int}(a:b...)
+@pure evenvalues(a::Int,b::Int) = Values{((b-a)÷2)+1,Int}(a:2:b...)
+
 end # module
