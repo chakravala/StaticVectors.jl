@@ -175,7 +175,7 @@ Base.@propagate_inbounds function Base.getindex(a::TupleVector{N}, ind::Union{In
 end
 
 function Base._getindex(::IndexStyle, A::AbstractVector, ind::TupleIndexing)
-    return AbstractTensors._getindex(A, index_sizes(unwrap(ind)), unwrap(ind))
+    return StaticVectors._getindex(A, index_sizes(unwrap(ind)), unwrap(ind))
 end
 
 @generated function _getindex(a::AbstractVector, ind_size::Val, ind)
@@ -195,7 +195,7 @@ end
 end
 
 function Base._setindex!(::IndexStyle, a::AbstractVector, value, ind::TupleIndexing)
-    return AbstractTensors._setindex!(a, value, index_sizes(ind), unwrap(ind))
+    return StaticVectors._setindex!(a, value, index_sizes(ind), unwrap(ind))
 end
 
 # setindex! from a scalar

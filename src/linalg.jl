@@ -31,6 +31,8 @@
 @inline Base.:*(a::Number, b::TupleVector{n,<:Number}) where n = map(c->Base.:*(a,c), b)
 @inline Base.:*(a::TupleVector{n,<:Number}, b::Number) where n = map(c->Base.:*(c,b), a)
 
+@inline Base.:*(a::Number, b::TupleVector) = broadcast(∏, a, b)
+@inline Base.:*(a::TupleVector, b::Number) = broadcast(∏, a, b)
 @inline Base.:*(a, b::TupleVector) = broadcast(∏, a, b)
 @inline Base.:*(a::TupleVector, b) = broadcast(∏, a, b)
 
@@ -43,6 +45,8 @@
 @inline Base.:/(a::TupleVector{n,<:Number}, b::Number) where n = broadcast(Base.:/, a, b)
 @inline Base.:\(a::Number, b::TupleVector{n,<:Number}) where n = broadcast(Base.:\, a, b)
 
+@inline Base.:/(a::TupleVector, b::Number) = broadcast(/, a, b)
+@inline Base.:\(a::Number, b::TupleVector) = broadcast(\, a, b)
 @inline Base.:/(a::TupleVector, b) = broadcast(/, a, b)
 @inline Base.:\(a, b::TupleVector) = broadcast(\, a, b)
 
