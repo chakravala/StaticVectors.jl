@@ -21,10 +21,10 @@ similar_type(::Type{SA}) where {SA<:TupleVector} = similar_type(SA,eltype(SA))
 similar_type(::SA,::Type{T}) where {SA<:TupleVector{N},T} where N = similar_type(SA,T,Val(N))
 similar_type(::Type{SA},::Type{T}) where {SA<:TupleVector{N},T} where N = similar_type(SA,T,Val(N))
 
-similar_type(::A,n::Val) where {A<:AbstractVector} = similar_type(A,eltype(A),n)
-similar_type(::Type{A},n::Val) where {A<:AbstractVector} = similar_type(A,eltype(A),n)
+similar_type(::A,n::Val) where {A<:AbstractArray} = similar_type(A,eltype(A),n)
+similar_type(::Type{A},n::Val) where {A<:AbstractArray} = similar_type(A,eltype(A),n)
 
-similar_type(::A,::Type{T},n::Val) where {A<:AbstractVector,T} = similar_type(A,T,n)
+similar_type(::A,::Type{T},n::Val) where {A<:AbstractArray,T} = similar_type(A,T,n)
 
 # We should be able to deal with SOneTo axes
 @pure similar_type(s::SOneTo) = similar_type(typeof(s))
@@ -32,7 +32,7 @@ similar_type(::A,::Type{T},n::Val) where {A<:AbstractVector,T} = similar_type(A,
 
 # Default types
 # Generally, use TupleVector
-similar_type(::Type{A},::Type{T},n::Val) where {A<:AbstractVector,T} = default_similar_type(T,n)
+similar_type(::Type{A},::Type{T},n::Val) where {A<:AbstractArray,T} = default_similar_type(T,n)
 default_similar_type(::Type{T},::Val{N}) where {N,T} = Values{N,T}
 
 similar_type(::Type{SA},::Type{T},n::Val) where {SA<:Variables,T} = mutable_similar_type(T,n)
