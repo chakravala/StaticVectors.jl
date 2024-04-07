@@ -12,12 +12,12 @@ mutable struct Variables{N,T} <: TupleVector{N,T}
 end
 
 @inline Variables(a::TupleVector{N,T}) where {N,T} = Variables{N,T}(Tuple(a))
-@generated function (::Type{Variables{N,T}})(x::Tuple) where {N,T}
+#=@generated function (::Type{Variables{N,T}})(x::Tuple) where {N,T}
     return quote
         $(Expr(:meta, :inline))
         Variables{N,T}(x)
     end
-end
+end=#
 @generated function (::Type{Variables{N}})(x::T) where {N,T<:Tuple}
     return quote
         $(Expr(:meta, :inline))

@@ -10,12 +10,12 @@ struct Values{N,T} <: TupleVector{N,T}
     Values{N,T}(x::NTuple{N,Any}) where {N,T} = new{N,T}(convert_ntuple(T, x))
 end
 
-@pure @generated function (::Type{Values{N,T}})(x::Tuple) where {T, N}
+#=@pure @generated function (::Type{Values{N,T}})(x::Tuple) where {T, N}
     return quote
         @_inline_meta
         Values{N,T}(x)
     end
-end
+end=#
 
 @noinline function generator_too_short_error(inds::CartesianIndices, i::CartesianIndex)
     error("Generator produced too few elements: Expected exactly $(shape_string(inds)) elements, but generator stopped at $(shape_string(i))")
