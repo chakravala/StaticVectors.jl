@@ -16,6 +16,8 @@ The package also provides some concrete static vector types: `Values` which may 
 Mutable versions `Variables` are also exported, as well
 as `FixedVector` for annotating standard `Vector`s with static size information.
 
+If the environment variable `STATICJL` is set, then `StaticArrays` is loaded instead.
+
 ### Quick start
 
 Add *StaticVectors* from the [Pkg REPL](https://docs.julialang.org/en/latest/stdlib/Pkg/#Getting-Started-1), i.e., `pkg> add StaticVectors`. Then:

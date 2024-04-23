@@ -19,6 +19,11 @@ export TupleVector, Values, Variables, FixedVector
 
 import Base: @propagate_inbounds, @_inline_meta, @pure
 
+if haskey(ENV,"STATICJL")
+    import StaticArrays: SVector, MVector, SizedVector, StaticVector, _diff
+    const Values,Variables,FixedVector,TupleVector = SVector,MVector,SizedVector,StaticVector
+else
+
 abstract type TupleVector{N,T} <: AbstractVector{T} end
 
 # Being a member of TupleMatrixLike or TupleVectorLike implies that Val(A)
@@ -56,6 +61,8 @@ include("arraymath.jl")
 include("linalg.jl")
 
 const SVector,MVector,SizedVector = Values,Variables,FixedVector
+
+end
 
 @pure countvalues(a::Int,b::Int) = Values{max(0,b-a+1),Int}(a:b...)
 @pure evenvalues(a::Int,b::Int) = Values{((b-a)÷2)+1,Int}(a:2:b...)
