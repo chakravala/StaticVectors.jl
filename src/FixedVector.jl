@@ -19,6 +19,7 @@ struct FixedVector{N,T,TData<:AbstractVector{T}} <: TupleVector{N,T}
     end
 end
 
+@inline FixedVector{N,T}(a::FixedVector{N,T}) where {N,T} = a
 @inline function FixedVector{N,T}(a::TData) where {N,T,TData<:AbstractVector{T}}
     return FixedVector{N,T,TData}(a)
 end
