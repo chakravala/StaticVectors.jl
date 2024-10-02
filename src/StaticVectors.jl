@@ -64,7 +64,32 @@ const SVector,MVector,SizedVector = Values,Variables,FixedVector
 
 end
 
+"""
+    count(a::Int,b::Int) -> Values
+
+Generates an incremental `Int` list of `Values` from `a` to `b`.
+"""
+@pure Base.count(a::Int,b::Int) = countvalues(a,b)
+
+"""
+    countvalues(a::Int,b::Int) -> Values
+
+Generates an incremental `Int` list of `Values` from `a` to `b`.
+"""
 @pure countvalues(a::Int,b::Int) = Values{max(0,b-a+1),Int}(a:b...)
+
+"""
+    evenvalues(a::Int,b::Int) -> Values
+
+Generates an `Int` list of `Values` by skipping in twos from `a` to `b`.
+"""
 @pure evenvalues(a::Int,b::Int) = Values{((b-a)÷2)+1,Int}(a:2:b...)
+
+"""
+    evens(a::Int,b::Int) -> Values
+
+Generates an `Int` list of `Values` by skipping in twos from `a` to `b`.
+"""
+const evens = evenvalues
 
 end # module
