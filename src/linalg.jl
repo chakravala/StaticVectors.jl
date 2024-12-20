@@ -56,23 +56,31 @@
 
 #--------------------------------------------------
 # Vector products
-@inline LinearAlgebra.dot(a::TupleVector, b::TupleVector) = _vecdot(a, b, LinearAlgebra.dot)
-@inline bilinear_vecdot(a::TupleVector, b::TupleVector) = _vecdot(a, b, Base.:*)
+@inline LinearAlgebra.dot(a::TupleVector, b::TupleVector) = _vecdot(a, b, Val(LinearAlgebra.dot))
+@inline bilinear_vecdot(a::TupleVector, b::TupleVector) = _vecdot(a, b, Val(Base.:*))
 
-@inline function _vecdot(a::TupleVector{S}, b::TupleVector{S}, product) where S
+@inline @generated function _vecdot(a::TupleVector{S}, b::TupleVector{S}, ::Val{product}) where {S,product}
     if S == 0
-        za, zb = zero(eltype(a)), zero(eltype(b))
+        :(product(zero(eltype(a)),zero(eltype(b))))
+    elseif S < 1<<12
+        Expr(:call,:∑,[:(@inbounds product(a[$j],b[$j])) for j ∈ 1:S]...)
     else
-        # Use an actual element if there is one, to support e.g. Vector{<:Number}
-        # element types for which runtime size information is required to construct
-        # a zero element.
-        za, zb = zero(a[1]), zero(b[1])
+        quote
+            if S == 0
+                za, zb = zero(eltype(a)), zero(eltype(b))
+            else
+                # Use an actual element if there is one, to support e.g. Vector{<:Number}
+                # element types for which runtime size information is required to construct
+                # a zero element.
+                za, zb = zero(a[1]), zero(b[1])
+            end
+            ret = product(za, zb) + product(za, zb)
+            @inbounds @simd for j = 1:S
+                ret += product(a[j], b[j])
+            end
+            return ret
+        end
     end
-    ret = product(za, zb) + product(za, zb)
-    @inbounds @simd for j = 1:S
-        ret += product(a[j], b[j])
-    end
-    return ret
 end
 
 #--------------------------------------------------
