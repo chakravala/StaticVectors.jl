@@ -10,8 +10,8 @@
 @propagate_inbounds (::Type{SA})(a::AbstractVector) where {SA <: TupleVector} = convert(SA, a)
 
 # this covers most conversions and "statically-sized reshapes"
-#@inline Base.convert(::Type{SA}, sa::TupleVector) where {SA<:TupleVector} = SA(Tuple(sa))
-#@inline Base.convert(::Type{SA}, sa::SA) where {SA<:TupleVector} = sa
+@inline Base.convert(::Type{SA}, sa::TupleVector) where {N,SA<:TupleVector{N}} = SA(Tuple(sa))
+@inline Base.convert(::Type{SA}, sa::SA) where {N,SA<:TupleVector{N}} = sa
 @inline Base.convert(::Type{SA}, x::Tuple) where {SA<:TupleVector} = SA(x) # convert -> constructor. Hopefully no loops...
 
 # support conversion to AbstractVector
