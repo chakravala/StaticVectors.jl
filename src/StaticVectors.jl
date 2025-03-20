@@ -7,8 +7,8 @@ module StaticVectors
 @inline inv(z) = Base.inv(z)
 @inline /(a,b) = Base.:/(a,b)
 @inline -(a,b) = Base.:-(a,b)
--(x) = Base.:-(x)
--(x::Symbol) = :(-$x)
+@inline -(x) = Base.:-(x)
+@inline -(x::Symbol) = :(-$x)
 for (OP,op) ∈ ((:∏,:*),(:∑,:+))
     @eval @inline $OP(x...) = Base.$op(x...)
 end
