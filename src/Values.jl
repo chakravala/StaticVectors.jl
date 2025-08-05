@@ -72,7 +72,7 @@ tvcollect
 
 @inline Values(a::TupleVector{N}) where N = Values{N}(Tuple(a))
 @propagate_inbounds Base.getindex(v::Values, i::Int) = v.v[i]
-@inline Tuple(v::Values) = v.v
+@inline Base.Tuple(v::Values) = v.v
 Base.dataids(::Values) = ()
 
 # See #53
